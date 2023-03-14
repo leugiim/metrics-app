@@ -1,7 +1,10 @@
 {
-    "recommendations": [
-        "svelte.svelte-vscode",
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"
-    ]
+	"recommendations": [
+		"svelte.svelte-vscode",
+		"bradlc.vscode-tailwindcss",
+		"ms-playwright.playwright",
+		"zixuanchen.vitest-explorer",
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode"
+	]
 }
