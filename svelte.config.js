@@ -24,6 +24,12 @@ const config = {
 		paths: {
 			// configurar 'base' si la app no va a estar en el directorio raiz del dominio
 			// base: '/doruscom_mayorista/build', //este caso es para localhost
+		},
+		alias: {
+			'@routes': './src/routes',
+			'@components': './src/lib/components',
+			'@utils': './src/lib/utils',
+			'@types': './src/lib/types'
 		}
 	}
 };

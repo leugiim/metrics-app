@@ -1,6 +1,7 @@
 {
 	"recommendations": [
 		"svelte.svelte-vscode",
+		"pivaszbs.svelte-autoimport",
 		"bradlc.vscode-tailwindcss",
 		"ms-playwright.playwright",
 		"zixuanchen.vitest-explorer",
