@@ -8,20 +8,7 @@
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
-		"strict": true,
-		"paths": {
-			// name and path to aliases
-			"@routes": ["./src/routes"],
-			"@routes/*": ["./src/routes/*"],
-			"$lib": ["./src/lib"],
-			"$lib/*": ["./src/lib/*"],
-			"@components": ["./src/lib/components"],
-			"@components/*": ["./src/lib/components/*"],
-			"@utils": ["./src/lib/utils"],
-			"@utils/*": ["./src/lib/utils/*"],
-			"@types": ["./src/lib/types"],
-			"@types/*": ["./src/lib/types/*"]
-		}
+		"strict": true
 	}
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
 	//
