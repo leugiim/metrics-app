@@ -4,17 +4,18 @@
 	import { setContext } from 'svelte';
 
 	import Loading from '$lib/components/Loading.svelte';
-	import useFetchUsuario from '$lib/stores/Usuarios';
+	import { useFetchUsuario } from '$lib/fetch/fetchUsuarios';
+	import { ResponseStatus } from '$lib/types/enums';
 
-	let { isLoading, error, user } = useFetchUsuario();
+	let { status, message, content: user } = useFetchUsuario();
 
 	$: setContext('user', $user);
 </script>
 
-{#if $isLoading}
+{#if $status == ResponseStatus.PENDING}
 	<Loading />
-{:else if $error}
-	<p>An error occured while fetching users</p>
+{:else if $status == ResponseStatus.ERROR}
+	<p>{$message}</p>
 {:else}
 	<slot />
 {/if}
