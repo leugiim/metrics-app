@@ -1,5 +1,16 @@
-<h1>Welcome to SvelteKit h1</h1>
-<h2>Welcome to SvelteKit h2</h2>
-<p class="text-yellow-500">
-	Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
-</p>
+<script lang="ts">
+	import Layout from './(loged)/+layout.svelte';
+	import Dashboard from './(loged)/dashboard/+page.svelte';
+	import Login from './login/+page.svelte';
+	import { loading, token } from '$lib/stores';
+</script>
+
+{#if $loading}
+	<p>loading...</p>
+{:else if $token}
+	<Layout>
+		<Dashboard />
+	</Layout>
+{:else}
+	<Login />
+{/if}

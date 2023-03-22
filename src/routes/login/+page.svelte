@@ -1,16 +1,18 @@
 <script lang="ts">
 	import { useFetchLoginMayorista } from '$lib/fetch/fetchMayoristas';
+	import type { BearerToken } from '$lib/types/Auth';
 	import { FetchStatus } from '$lib/types/Fetch';
 
-	let { status, message, content: token } = useFetchLoginMayorista('sistemas', 'S1st3m4s.2022');
+	// let { status, message, content: token } = useFetchLoginMayorista('sistemas', 'S1st3m4s.2022');
+
+	// $: if($status == FetchStatus.SUCCESS && $token !== null){
+	//     const bearerToken:BearerToken = `Bearer ${$token}`;
+	//     localStorage.setItem('token', bearerToken);
+	// }
 </script>
 
-<h1>login</h1>
+<svelte:head>
+	<title>Login</title>
+</svelte:head>
 
-{#if $status == FetchStatus.PENDING}
-	<p>loading...</p>
-{:else if $status == FetchStatus.ERROR}
-	<p>{$message}</p>
-{:else}
-	<p>logged in {$token}</p>
-{/if}
+<h1>login</h1>

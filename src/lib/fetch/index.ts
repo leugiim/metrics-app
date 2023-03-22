@@ -1,3 +1,4 @@
+import { onMount } from 'svelte';
 import { writable } from 'svelte/store';
 
 import {
@@ -66,11 +67,13 @@ export const useFetch = <T, B = null>(params: FetchParams<B>): FetchResult<T> =>
 		status: writable(FetchStatus.PENDING)
 	};
 
-	fetchWithMethod<T, B>(url, method ?? FetchMethod.GET, headers ?? {}, body).then((response) => {
-		response = validateResponse(schema, response);
-		result.status.set(response.status);
-		result.message.set(response.message);
-		result.content.set(response.content);
+	onMount(async () => {
+		fetchWithMethod<T, B>(url, method ?? FetchMethod.GET, headers ?? {}, body).then((response) => {
+			response = validateResponse(schema, response);
+			result.status.set(response.status);
+			result.message.set(response.message);
+			result.content.set(response.content);
+		});
 	});
 
 	return result;
