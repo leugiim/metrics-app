@@ -4,17 +4,18 @@
 	import { setContext } from 'svelte';
 
 	import Loading from '$lib/components/Loading.svelte';
-	import { useFetchUsuario } from '$lib/fetch/fetchUsuarios';
-	import { ResponseStatus } from '$lib/types/enums';
+	import { useFetchMayorista } from '$lib/fetch/fetchMayoristas';
+	import { FetchStatus } from '$lib/types/Fetch';
 
-	let { status, message, content: user } = useFetchUsuario();
+	let { status, message, content: user } = useFetchMayorista();
 
+	console.log('user', $user);
 	$: setContext('user', $user);
 </script>
 
-{#if $status == ResponseStatus.PENDING}
+{#if $status == FetchStatus.PENDING}
 	<Loading />
-{:else if $status == ResponseStatus.ERROR}
+{:else if $status == FetchStatus.ERROR}
 	<p>{$message}</p>
 {:else}
 	<slot />

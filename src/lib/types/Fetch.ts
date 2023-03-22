@@ -1,15 +1,38 @@
 import type { Writable } from 'svelte/store';
-import { z } from 'zod';
-import type { ResponseStatus } from './enums';
+import { z, ZodString } from 'zod';
+import type { ZodObject, ZodRawShape } from 'zod';
+
+export enum FetchStatus {
+	PENDING = 'PENDING',
+	SUCCESS = 'SUCCESS',
+	ERROR = 'ERROR'
+}
+
+export enum FetchMethod {
+	GET = 'GET',
+	POST = 'POST',
+	PUT = 'PUT',
+	DELETE = 'DELETE'
+}
 
 export interface FetchResponse<T> {
-	status: ResponseStatus;
+	status: FetchStatus;
 	message: string;
 	content: T | null;
 }
 
+export interface FetchParams<T> {
+	schema: FetchSchema;
+	url: string;
+	method?: FetchMethod;
+	headers?: object;
+	body?: T;
+}
+
+export type FetchSchema = ZodObject<ZodRawShape> | ZodString;
+
 export interface FetchResult<T> {
-	status: Writable<ResponseStatus>;
+	status: Writable<FetchStatus>;
 	message: Writable<string>;
 	content: Writable<T | null>;
 }

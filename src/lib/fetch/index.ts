@@ -1,24 +1,27 @@
 import { writable } from 'svelte/store';
 
-import { FetchMethod, ResponseStatus } from '$lib/types/enums';
-import { type FetchResponse, type FetchResult, fetchResponseSchema } from '$lib/types/Fetch';
-import type { ZodObject } from 'zod';
+import {
+	type FetchResponse,
+	type FetchResult,
+	type FetchParams,
+	type FetchSchema,
+	fetchResponseSchema,
+	FetchStatus,
+	FetchMethod
+} from '$lib/types/Fetch';
 
-const validateResponse = <T>(
-	schema: ZodObject<any>,
-	response: FetchResponse<T>
-): FetchResponse<T> => {
+const validateResponse = <T>(schema: FetchSchema, response: FetchResponse<T>): FetchResponse<T> => {
 	if (!fetchResponseSchema.safeParse(response).success) {
-		response.status = ResponseStatus.ERROR;
+		response.status = FetchStatus.ERROR;
 		response.message = 'Invalid response';
 	}
 
-	if (response.status === ResponseStatus.SUCCESS && !schema.safeParse(response).success) {
-		response.status = ResponseStatus.ERROR;
+	if (response.status === FetchStatus.SUCCESS && !schema.safeParse(response.content).success) {
+		response.status = FetchStatus.ERROR;
 		response.message = 'Invalid content';
 	}
 
-	if (response.status === ResponseStatus.ERROR) {
+	if (response.status === FetchStatus.ERROR) {
 		console.error(response.message, response);
 		response.content = null;
 	}
@@ -26,15 +29,17 @@ const validateResponse = <T>(
 	return response;
 };
 
-const fetchWithMethod = async <B, T>(
+const fetchWithMethod = async <T, B>(
 	url: string,
 	method: FetchMethod,
+	headers: object,
 	body?: B
 ): Promise<FetchResponse<T>> => {
 	const response: FetchResponse<T> = await fetch(url, {
 		method: method,
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			...headers
 		},
 		body: JSON.stringify(body)
 	})
@@ -43,7 +48,7 @@ const fetchWithMethod = async <B, T>(
 		})
 		.catch((e) => {
 			const result: FetchResponse<null> = {
-				status: ResponseStatus.ERROR,
+				status: FetchStatus.ERROR,
 				message: e.message,
 				content: null
 			};
@@ -52,33 +57,20 @@ const fetchWithMethod = async <B, T>(
 	return response;
 };
 
-export const useFetch = <B, T>(
-	schema: ZodObject<any>,
-	url: string,
-	method: FetchMethod = FetchMethod.GET,
-	body?: B
-): FetchResult<T> => {
+export const useFetch = <T, B = null>(params: FetchParams<B>): FetchResult<T> => {
+	const { schema, url, method, headers, body } = params;
+
 	const result: FetchResult<T> = {
 		content: writable(null),
 		message: writable(''),
-		status: writable(ResponseStatus.PENDING)
+		status: writable(FetchStatus.PENDING)
 	};
 
-	fetchWithMethod<B, T>(url, method, body).then((response) => {
-		// TODO: descomentar cuando se elimine el todo que hay a continuación y funcione la api
-		// response = validateResponse(schema, response);
-		// result.status.set(response.status);
-		// result.message.set(response.message);
-		// result.content.set(response.content);
-
-		// TODO: hardcodeado hasta que funcionen los fetch que hagamos la api
-		result.status.set(ResponseStatus.SUCCESS);
-		result.message.set('');
-		result.content.set({
-			id: 'id-aleatorio',
-			nombre: 'Miguel',
-			apellido: 'Rodríguez'
-		});
+	fetchWithMethod<T, B>(url, method ?? FetchMethod.GET, headers ?? {}, body).then((response) => {
+		response = validateResponse(schema, response);
+		result.status.set(response.status);
+		result.message.set(response.message);
+		result.content.set(response.content);
 	});
 
 	return result;

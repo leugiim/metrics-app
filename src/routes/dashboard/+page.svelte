@@ -1,12 +1,11 @@
 <script lang="ts">
-	import type { Usuario } from '$lib/types/Usuario';
+	import type { Mayorista } from '$lib/types/Mayorista';
 	import { getContext } from 'svelte';
 
-	const user = getContext<Usuario | null>('user');
+	const user = getContext<Mayorista | null>('user');
 </script>
 
 <h1>dashboard</h1>
 
-{user?.id}
-{user?.nombre}
-{user?.apellido}
+{user?.guid}
+{user?.username}
