@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export type Token = string;
+export type Token = string | null;
 export type BasicToken = `Basic ${string}` | null;
 export type BearerToken = `Bearer ${string}` | null;
 

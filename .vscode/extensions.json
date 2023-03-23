@@ -6,6 +6,7 @@
 		"ms-playwright.playwright",
 		"zixuanchen.vitest-explorer",
 		"dbaeumer.vscode-eslint",
-		"esbenp.prettier-vscode"
+		"esbenp.prettier-vscode",
+		"stivo.tailwind-fold"
 	]
 }

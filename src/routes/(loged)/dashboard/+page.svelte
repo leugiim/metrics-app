@@ -2,8 +2,12 @@
 	import { token } from '$lib/stores';
 	import { useFetchMayorista } from '$lib/fetch/fetchMayoristas';
 	import { FetchStatus } from '$lib/types/Fetch';
+	import { getInitialFetchResult } from '$lib/fetch';
+	import type { Mayorista } from '$lib/types/Mayorista';
 
-	let { status, message, content: user } = useFetchMayorista($token);
+	let { status, message, content: user } = getInitialFetchResult<Mayorista>();
+
+	useFetchMayorista({ status, message, content: user }, $token);
 </script>
 
 <h1>dashboard</h1>

@@ -2,18 +2,26 @@ import { getLoginEndpoint, getMayoristaEndpoint } from '$lib/fetch/endpoints';
 import { useFetch } from '$lib/fetch';
 import { type Token, tokenSchema, type BasicToken, type BearerToken } from '$lib/types/Auth';
 import { type Mayorista, mayoristaSchema } from '$lib/types/Mayorista';
-import { writable } from 'svelte/store';
-import { FetchStatus } from '$lib/types/Fetch';
+import { FetchStatus, type FetchResult } from '$lib/types/Fetch';
 
-export const useFetchLoginMayorista = (user: string, pass: string) => {
+export const useFetchLoginMayorista = (
+	fetchResult: FetchResult<Token>,
+	user: string,
+	pass: string
+) => {
 	const credentials = `${user}:${pass}`;
 	const basicToken: BasicToken = `Basic ${btoa(credentials)}`;
 
-	return useFetchLoginMayoristaByToken(basicToken);
+	console.log(basicToken);
+
+	return useFetchLoginMayoristaByToken(fetchResult, basicToken);
 };
 
-export const useFetchLoginMayoristaByToken = (token: BasicToken) => {
-	return useFetch<Token>({
+export const useFetchLoginMayoristaByToken = (
+	fetchResult: FetchResult<Token>,
+	token: BasicToken
+) => {
+	return useFetch<Token>(fetchResult, {
 		schema: tokenSchema,
 		url: getLoginEndpoint(),
 		headers: {
@@ -22,16 +30,14 @@ export const useFetchLoginMayoristaByToken = (token: BasicToken) => {
 	});
 };
 
-export const useFetchMayorista = (token: BearerToken) => {
+export const useFetchMayorista = (fetchResult: FetchResult<Mayorista>, token: BearerToken) => {
 	if (!token) {
-		return {
-			content: writable(null),
-			message: writable('El usuario no está logueado'),
-			status: writable(FetchStatus.SUCCESS)
-		};
+		fetchResult.status.set(FetchStatus.SUCCESS);
+		fetchResult.message.set('El usuario no está logueado');
+		fetchResult.content.set(null);
 	}
 
-	return useFetch<Mayorista>({
+	useFetch<Mayorista>(fetchResult, {
 		schema: mayoristaSchema,
 		url: getMayoristaEndpoint(),
 		headers: {

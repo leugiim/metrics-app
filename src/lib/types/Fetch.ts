@@ -3,6 +3,7 @@ import { z, ZodString } from 'zod';
 import type { ZodObject, ZodRawShape } from 'zod';
 
 export enum FetchStatus {
+	WAITING = 'WAITING',
 	PENDING = 'PENDING',
 	SUCCESS = 'SUCCESS',
 	ERROR = 'ERROR'
