@@ -9,10 +9,11 @@
 	let user: string;
 	let pass: string;
 	let errorMessage: string;
-	let { status, message, content: token } = getInitialFetchResult<Token>();
+	let { status, httpStatus, message, content: token } = getInitialFetchResult<Token>();
 
 	const handleLogin = () => {
-		if (validateForm()) useFetchLoginMayorista({ status, message, content: token }, user, pass);
+		if (validateForm())
+			useFetchLoginMayorista({ status, httpStatus, message, content: token }, user, pass);
 	};
 
 	const validateForm = () => {

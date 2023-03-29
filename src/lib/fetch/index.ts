@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import { goto } from '$app/navigation';
 
 import {
 	type FetchResponse,
@@ -49,6 +50,7 @@ const fetchWithMethod = async <T, B>(
 		.catch((e) => {
 			const result: FetchResponse<null> = {
 				status: FetchStatus.ERROR,
+				httpStatus: 'CATCH_ERROR',
 				message: e.message,
 				content: null
 			};
@@ -64,7 +66,11 @@ export const useFetch = <T, B = null>(result: FetchResult<T>, params: FetchParam
 
 	fetchWithMethod<T, B>(url, method ?? FetchMethod.GET, headers ?? {}, body).then((response) => {
 		response = validateResponse(schema, response);
+		if (response.httpStatus === 'FORBIDDEN') {
+			goto('/logout');
+		}
 		result.status.set(response.status);
+		result.httpStatus.set(response.httpStatus);
 		result.message.set(response.message);
 		result.content.set(response.content);
 	});
@@ -72,9 +78,10 @@ export const useFetch = <T, B = null>(result: FetchResult<T>, params: FetchParam
 
 export const getInitialFetchResult = <T>(): FetchResult<T> => {
 	const result: FetchResult<T> = {
-		content: writable(null),
+		status: writable(FetchStatus.WAITING),
+		httpStatus: writable(''),
 		message: writable(''),
-		status: writable(FetchStatus.WAITING)
+		content: writable(null)
 	};
 	return result;
 };
