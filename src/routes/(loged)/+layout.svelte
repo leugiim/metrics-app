@@ -22,12 +22,4 @@
 	}
 </script>
 
-<nav>
-	<a href="/dashboard">dashboard</a>
-	<a href="/contratacion">contratacion</a>
-	<a href="/login">login</a>
-	<a href="/">index</a>
-	<a href="/logout">logout</a>
-</nav>
-
 <slot />
