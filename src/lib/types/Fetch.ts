@@ -18,7 +18,7 @@ export enum FetchMethod {
 
 export interface FetchResponse<T> {
 	status: FetchStatus;
-	httpStatus: string;
+	httpStatus: string | number;
 	message: string;
 	content: T | null;
 }
@@ -35,14 +35,14 @@ export type FetchSchema = ZodObject<ZodRawShape> | ZodString;
 
 export interface FetchResult<T> {
 	status: Writable<FetchStatus>;
-	httpStatus: Writable<string>;
+	httpStatus: Writable<string | number>;
 	message: Writable<string>;
 	content: Writable<T | null>;
 }
 
 export const fetchResponseSchema = z.object({
 	status: z.string(),
-	httpStatus: z.string(),
+	httpStatus: z.union([z.string(), z.number()]),
 	message: z.string(),
 	content: z.any().optional()
 });

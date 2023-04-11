@@ -2,7 +2,8 @@ import { getLoginEndpoint, getMayoristaEndpoint } from '$lib/fetch/endpoints';
 import { useFetch } from '$lib/fetch';
 import { type Token, tokenSchema, type BasicToken, type BearerToken } from '$lib/types/Auth';
 import { type Mayorista, mayoristaSchema } from '$lib/types/Mayorista';
-import { FetchStatus, type FetchResult } from '$lib/types/Fetch';
+import type { FetchResult } from '$lib/types/Fetch';
+import { validarToken } from '$lib/utils/validations';
 
 export const useFetchLoginMayorista = (
 	fetchResult: FetchResult<Token>,
@@ -31,17 +32,13 @@ export const useFetchLoginMayoristaByToken = (
 };
 
 export const useFetchMayorista = (fetchResult: FetchResult<Mayorista>, token: BearerToken) => {
-	if (!token) {
-		fetchResult.status.set(FetchStatus.SUCCESS);
-		fetchResult.message.set('El usuario no está logueado');
-		fetchResult.content.set(null);
+	if (validarToken(fetchResult, token)) {
+		useFetch<Mayorista>(fetchResult, {
+			schema: mayoristaSchema,
+			url: getMayoristaEndpoint(),
+			headers: {
+				Authorization: token
+			}
+		});
 	}
-
-	useFetch<Mayorista>(fetchResult, {
-		schema: mayoristaSchema,
-		url: getMayoristaEndpoint(),
-		headers: {
-			Authorization: token
-		}
-	});
 };
