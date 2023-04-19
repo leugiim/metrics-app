@@ -48,7 +48,7 @@
 						{#if index == 0}
 							<i class="fa-solid fa-house hover:fa-xl mr-2 h-4 w-4 hover:text-light" />
 						{:else}
-							<i class="fa-solid fa-greater-than hover:fa-xl mr-2 h-4 w-4 hover:text-light" />
+							<i class="fa-solid fa-chevron-right hover:fa-xl mr-2 h-4 w-4 hover:text-light" />
 						{/if}
 						{section.name}
 					</a>

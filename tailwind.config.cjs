@@ -1,5 +1,5 @@
 const config = {
-	content: ['./src/**/*.{html,js,svelte,ts}'],
+	content: ['./src/**/*.{html,js,svelte,ts}', './node_modules/flowbite/**/*.{html,js,svelte,ts}'],
 
 	theme: {
 		extend: {
@@ -17,7 +17,7 @@ const config = {
 		}
 	},
 
-	plugins: []
+	plugins: [require('flowbite/plugin')]
 };
 
 module.exports = config;

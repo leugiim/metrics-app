@@ -1,4 +1,0 @@
-<script lang="ts">
-</script>
-
-<div class="flex flex-col bg-white" />
