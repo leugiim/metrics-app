@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { mayorista, token } from '$lib/stores';
+	import Navbar from '$lib/components/menus/Navbar.svelte';
 	import { browser } from '$app/environment';
 	import { getInitialFetchResult } from '$lib/fetch';
 	import { useFetchMayorista } from '$lib/fetch/fetchMayoristas';
@@ -22,4 +23,5 @@
 	}
 </script>
 
+<Navbar user={$mayorista?.username} />
 <slot />

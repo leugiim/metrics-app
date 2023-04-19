@@ -31,6 +31,12 @@
 					</a>
 				</li>
 				<li>
+					<a href="/productos" class="p-3 hover:bg-light">
+						<i class="fa-solid fa-globe fa-lg" />
+						Productos
+					</a>
+				</li>
+				<li>
 					<a href="/facturas" class="p-3 hover:bg-light">
 						<i class="fa-solid fa-layer-group fa-lg" />
 						Facturas

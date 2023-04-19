@@ -4,5 +4,4 @@
 	import { token, mayorista } from '$lib/stores';
 </script>
 
-<Navbar user={$mayorista?.username} />
 <Section headerTitle="Contratación" />

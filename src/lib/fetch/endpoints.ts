@@ -9,6 +9,10 @@ export const getMayoristaEndpoint = () => {
 	return `${apiMayoristaUrl}/mayorista`;
 };
 
+export const getProductosEndpoint = () => {
+	return `${apiMayoristaUrl}/productos`;
+};
+
 export const getCoberturaCalleEndpoint = (calle: string) => {
 	return `${apiCallejeroUrl}/cobertura/buscar/` + encodeURIComponent(calle);
 };
