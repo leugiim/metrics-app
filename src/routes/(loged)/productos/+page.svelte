@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import Logo from '$lib/components/Logo.svelte';
 	import { getInitialFetchResult } from '$lib/fetch';
 	import { useFetchProductos } from '$lib/fetch/fetchProductos';
 	import { token } from '$lib/stores';

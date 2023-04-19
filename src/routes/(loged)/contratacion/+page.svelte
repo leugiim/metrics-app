@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Navbar from '$lib/components/menus/Navbar.svelte';
 	import Section from '$lib/components/sections/Section.svelte';
 	import AccordionItemTitle from '$lib/components/menus/AccordionItemTitle.svelte';
 	import Servicios from '$lib/components/contratacion/Servicios.svelte';
@@ -7,7 +6,6 @@
 	import Resumen from '$lib/components/contratacion/Resumen.svelte';
 	import { getInitialContratacion, type Contratacion } from '$lib/types/Contratacion';
 	import { AccordionItem, Accordion } from 'flowbite-svelte';
-	import { token, mayorista } from '$lib/stores';
 
 	const currentYear = new Date().getFullYear();
 

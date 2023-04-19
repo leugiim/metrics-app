@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { mayorista, token } from '$lib/stores';
 	import Navbar from '$lib/components/menus/Navbar.svelte';
 	import { browser } from '$app/environment';
