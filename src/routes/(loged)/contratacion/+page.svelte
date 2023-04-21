@@ -14,7 +14,6 @@
 
 <Section headerTitle="Contratación" footerMessage="{currentYear} © Doruscom Mayorista v1.0">
 	<Accordion
-		slot="body"
 		multiple
 		activeClasses="bg-primary text-alternative focus:ring-4 focus:ring-alternative"
 		inactiveClasses="text-secondary hover:bg-primary hover:text-alternative"
