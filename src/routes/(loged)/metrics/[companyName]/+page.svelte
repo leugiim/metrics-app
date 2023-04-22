@@ -23,4 +23,8 @@
 	<MetricChart company={$company} />
 
 	<FilterMetricsTable company={$company} />
+{:else if $message}
+	<div class="grid h-80 place-items-center text-primary">
+		<h1 class="text-2xl font-bold">{$message}</h1>
+	</div>
 {/if}

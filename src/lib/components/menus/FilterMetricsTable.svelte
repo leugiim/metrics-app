@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Company, Metric } from '$lib/types/Company';
+	import { parseDate, type Company, type Metric } from '$lib/types/Company';
 	import {
 		Card,
 		Pagination,
@@ -89,15 +89,6 @@
 		filteredMetrics = filteredMetrics.sort((a, b) => {
 			return a.date > b.date ? -1 : 1;
 		});
-	};
-	const parseDate = (date: Date) => {
-		const day = date.getDate().toString().padStart(2, '0');
-		const month = (date.getMonth() + 1).toString().padStart(2, '0');
-		const year = date.getFullYear();
-		const hours = date.getHours();
-		const minutes = date.getMinutes();
-		const seconds = date.getSeconds();
-		return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
 	};
 </script>
 
