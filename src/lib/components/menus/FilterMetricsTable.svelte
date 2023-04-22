@@ -107,7 +107,13 @@
 			Visualizing from <b>{pageHelper.start}</b> to <b>{pageHelper.end}</b> of
 			<b>{pageHelper.length}</b>
 		</p>
-		<Pagination {pages} on:click={handleClick} on:previous={previous} on:next={next}>
+		<Pagination
+			{pages}
+			on:click={handleClick}
+			on:previous={previous}
+			on:next={next}
+			activeClass="text-primary bg-red-300"
+		>
 			<svelte:fragment slot="prev">
 				<ChevronLeft class="h-5 w-5" />
 			</svelte:fragment>

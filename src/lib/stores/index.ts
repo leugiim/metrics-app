@@ -6,8 +6,13 @@ import type { User } from '$lib/types/User';
 export const loading = writable<boolean>(true);
 export const token = writable<BearerToken>();
 export const logedUser = writable<User | null>();
+export const companyName = writable<string>();
 
 if (browser) {
 	token.set(localStorage.getItem('token') as BearerToken);
-	loading.set(false);
+
+	// I use this to simulate a loading screen
+	setTimeout(() => {
+		loading.set(false);
+	}, 1000);
 }
