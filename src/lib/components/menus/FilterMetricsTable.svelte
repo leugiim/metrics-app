@@ -33,7 +33,6 @@
 		filterMetrics();
 
 		// Pagination
-		paginateMetrics();
 		calcPage();
 	}
 
@@ -51,6 +50,7 @@
 		calcPage();
 	};
 	const calcPage = () => {
+		paginateMetrics();
 		const start = activePage * imtesPerPage;
 		const end = Math.min(start + imtesPerPage, filteredMetrics.length);
 		pageHelper = { start, end, length: filteredMetrics.length };
@@ -59,7 +59,6 @@
 	const paginateMetrics = () => {
 		pages = [];
 		numPages = Math.ceil(filteredMetrics.length / imtesPerPage);
-		console.log(numPages);
 		if (activePage >= numPages) activePage = 0;
 		const startPage = Math.max(activePage - numberOfPaginationPages, 0);
 		const endPage = Math.min(activePage + numberOfPaginationPages, numPages);
@@ -70,8 +69,6 @@
 				active: i === activePage
 			});
 		}
-		console.log(pages);
-		console.log(activePage);
 	};
 	const filterMetrics = () => {
 		filteredMetrics = [];
