@@ -19,7 +19,7 @@ export enum FetchMethod {
 export interface FetchResponse<T> {
 	status: FetchStatus;
 	httpStatus: string | number;
-	message: string;
+	message?: string;
 	content: T | null;
 }
 
@@ -43,6 +43,6 @@ export interface FetchResult<T> {
 export const fetchResponseSchema = z.object({
 	status: z.string(),
 	httpStatus: z.union([z.string(), z.number()]),
-	message: z.string(),
+	message: z.string().optional(),
 	content: z.any().optional()
 });

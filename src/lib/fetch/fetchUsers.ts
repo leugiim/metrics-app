@@ -1,4 +1,4 @@
-import { getLoginEndpoint, getMayoristaEndpoint } from '$lib/fetch/endpoints';
+import { getLoginEndpoint, getUserEndpoint } from '$lib/fetch/endpoints';
 import { useFetch } from '$lib/fetch';
 import { type Token, tokenSchema, type BasicToken, type BearerToken } from '$lib/types/Auth';
 import { type User, userSchema } from '$lib/types/User';
@@ -26,7 +26,7 @@ export const useFetchUser = (fetchResult: FetchResult<User>, token: BearerToken)
 	if (validarToken(fetchResult, token)) {
 		useFetch<User>(fetchResult, {
 			schema: userSchema,
-			url: getMayoristaEndpoint(),
+			url: getUserEndpoint(),
 			headers: {
 				Authorization: token
 			}
