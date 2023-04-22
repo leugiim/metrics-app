@@ -8,6 +8,6 @@ export const getUserEndpoint = () => {
 	return `${apiUrl}/user`;
 };
 
-export const getProductosEndpoint = () => {
-	return `${apiUrl}/productos`;
+export const getCompanyEndpoint = (companyName: string) => {
+	return `${apiUrl}/company/${encodeURIComponent(companyName)}`;
 };

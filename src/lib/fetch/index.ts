@@ -74,18 +74,23 @@ const fetchWithMethod = async <T, B>(
 	return response;
 };
 
-export const useFetch = <T, B = null>(result: FetchResult<T>, params: FetchParams<B>) => {
+export const useFetch = <T, B = null>(
+	result: FetchResult<T>,
+	params: FetchParams<B>,
+	parse?: (obj: T) => T
+) => {
 	const { schema, url, method, headers, body } = params;
 
 	result.status.set(FetchStatus.PENDING);
 
 	fetchWithMethod<T, B>(url, method ?? FetchMethod.GET, headers ?? {}, body).then((response) => {
+		if (parse && response.content !== null) response.content = parse(response.content);
 		response = validateResponse(schema, response);
 		if (response.httpStatus === 'FORBIDDEN') goto('/logout');
 
 		result.status.set(response.status);
 		result.httpStatus.set(response.httpStatus);
-		result.message.set(response.message);
+		result.message.set(response.message ?? '');
 		result.content.set(response.content);
 	});
 };

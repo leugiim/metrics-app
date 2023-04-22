@@ -43,7 +43,7 @@
 			<Logo src="img/factorial.svg" alt="Factorial Logo" width={200} />
 		</div>
 		<h1 class="text-[33px] font-bold text-dark">Log In</h1>
-		<div class="flex flex-col gap-3 -space-y-px rounded-md shadow-sm">
+		<div class="flex flex-col gap-3 -space-y-px">
 			<div>
 				<LoginTextBox type="text" placeholder="User" icon="fa-solid fa-user" bind:value={user} />
 			</div>
@@ -57,7 +57,7 @@
 			</div>
 
 			{#if errorMessage}
-				<div class="text-sm text-red-500">{errorMessage}</div>
+				<p class="text-sm text-primary">{errorMessage}</p>
 			{/if}
 		</div>
 
