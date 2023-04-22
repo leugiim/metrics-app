@@ -4,4 +4,4 @@
 	export let width: number;
 </script>
 
-<img class="mx-auto h-auto" style="width: {width}px" {src} {alt} />
+<img class="mx-auto h-auto text-primary" style="width: {width}px" {src} {alt} />

@@ -23,7 +23,7 @@ const config = {
 		}),
 		paths: {
 			// configurar 'base' si la app no va a estar en el directorio raiz del dominio
-			// base: '/doruscom_mayorista/build', //este caso es para localhost
+			// base: '/metrics-app/build', //este caso es para localhost
 		}
 	}
 };

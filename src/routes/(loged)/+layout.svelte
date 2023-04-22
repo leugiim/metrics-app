@@ -1,26 +1,25 @@
 <script lang="ts">
-	import { mayorista, token } from '$lib/stores';
+	import { logedUser, token } from '$lib/stores';
 	import Navbar from '$lib/components/menus/Navbar.svelte';
 	import { browser } from '$app/environment';
 	import { getInitialFetchResult } from '$lib/fetch';
-	import { useFetchMayorista } from '$lib/fetch/fetchMayoristas';
+	import { useFetchUser } from '$lib/fetch/fetchUsers';
 	import { FetchStatus } from '$lib/types/Fetch';
-	import type { Mayorista } from '$lib/types/Mayorista';
+	import type { User } from '$lib/types/User';
 	import { onMount } from 'svelte';
 
-	let { status, httpStatus, message, content: user } = getInitialFetchResult<Mayorista>();
+	let { status, httpStatus, message, content: user } = getInitialFetchResult<User>();
 
 	onMount(() => {
 		if (browser) {
-			useFetchMayorista({ status, httpStatus, message, content: user }, $token);
+			useFetchUser({ status, httpStatus, message, content: user }, $token);
 		}
 	});
 
 	$: if ($status == FetchStatus.SUCCESS) {
-		console.log('Actualizando mayorista:', $user);
-		mayorista.set($user);
+		logedUser.set($user);
 	}
 </script>
 
-<Navbar user={$mayorista?.username} />
+<Navbar user={$logedUser?.username} />
 <slot />

@@ -9,7 +9,7 @@
 		class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between px-4 py-2.5 md:px-6"
 	>
 		<a href="/" class="flex items-center">
-			<Logo src="img/doruscom.png" alt="Doruscom Logo" width={200} />
+			<Logo src="img/factorial.svg" alt="Factorial Logo" width={200} />
 		</a>
 		<div class="flex items-center">
 			<i class="fa-solid fa-circle-user fa-2xl mr-3" />

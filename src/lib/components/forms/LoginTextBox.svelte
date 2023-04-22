@@ -21,7 +21,7 @@
 	<input
 		type={calcType}
 		{placeholder}
-		class="relative block w-full border-0 py-1.5 text-gray-900 outline-none ring-0 ring-inset placeholder:text-primary"
+		class="relative block w-full border-0 py-1.5 text-gray-900 outline-none ring-0 ring-inset placeholder:text-dark"
 		{value}
 		on:input={handleInput}
 	/>
