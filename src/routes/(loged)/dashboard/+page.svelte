@@ -1,13 +1,25 @@
 <script lang="ts">
-	import { logedUser } from '$lib/stores';
+	import { getInitialFetchResult } from '$lib/fetch';
+	import { useFetchCreateCompany } from '$lib/fetch/fetchCompany';
+	import { logedUser, token } from '$lib/stores';
+	import type { Company } from '$lib/types/Company';
 	import { Card, Input, Label, Modal } from 'flowbite-svelte';
 
 	let formModal = false;
 	let companyName = '';
+	let { status, httpStatus, message, content: company } = getInitialFetchResult<Company>();
 
 	const handleCreateCompany = () => {
-		console.log(companyName);
+		if (companyName === '') return;
+		useFetchCreateCompany({ status, httpStatus, message, content: company }, $token, companyName);
 	};
+
+	$: if ($company) {
+		$logedUser?.companiesPermissions.push($company.name);
+		logedUser.set($logedUser);
+		companyName = '';
+		formModal = false;
+	}
 </script>
 
 <svelte:head>
@@ -58,6 +70,9 @@
 				<span>Company name</span>
 				<Input type="text" required bind:value={companyName} />
 			</Label>
+			{#if $message}
+				<div class="text-sm text-primary">{$message}</div>
+			{/if}
 			<button
 				on:click={handleCreateCompany}
 				type="submit"

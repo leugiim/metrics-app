@@ -11,3 +11,7 @@ export const getUserEndpoint = () => {
 export const getCompanyEndpoint = (companyName: string) => {
 	return `${apiUrl}/company/${encodeURIComponent(companyName)}`;
 };
+
+export const getCreateCompanyEndpoint = () => {
+	return `${apiUrl}/company/`;
+};
