@@ -61,11 +61,11 @@
 		numPages = Math.ceil(filteredMetrics.length / imtesPerPage);
 		if (activePage >= numPages) activePage = 0;
 		const startPage = Math.max(activePage - numberOfPaginationPages, 0);
-		const endPage = Math.min(activePage + numberOfPaginationPages, numPages);
+		const endPage = Math.min(activePage + numberOfPaginationPages + 1, numPages);
 
 		for (let i = startPage; i < endPage; i++) {
 			pages.push({
-				name: (i + 1).toString(),
+				name: (i + 1).toString().padStart(2, '0'),
 				active: i === activePage
 			});
 		}

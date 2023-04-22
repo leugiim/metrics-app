@@ -19,7 +19,13 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Metrics</title>
+</svelte:head>
+
 {#if $company}
+	<h1 class="m-20 text-5xl font-bold uppercase text-primary">{$company.name}</h1>
+
 	<MetricChart company={$company} />
 
 	<FilterMetricsTable company={$company} />
