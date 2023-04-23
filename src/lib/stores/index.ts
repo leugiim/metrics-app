@@ -14,5 +14,5 @@ if (browser) {
 	// I use this to simulate a loading screen
 	setTimeout(() => {
 		loading.set(false);
-	}, 1000);
+	}, 2000);
 }

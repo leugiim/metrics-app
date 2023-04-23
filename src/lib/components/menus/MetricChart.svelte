@@ -2,7 +2,7 @@
 	import type { Graphic } from '$lib/types/Graphic';
 	import { parseDate, type Company } from '$lib/types/Company';
 	import { Card } from 'flowbite-svelte';
-	import Line from '$lib/components/graficas/Line.svelte';
+	import Line from '$lib/components/menus/Line.svelte';
 
 	export let company: Company;
 
